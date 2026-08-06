@@ -73,53 +73,30 @@ a:focus-visible, button:focus-visible{outline:3px solid var(--gold);outline-offs
 .btn--gold{background:var(--gold);color:var(--emerald-deep);}
 .btn--gold:hover{background:var(--gold-soft);}
 
-/* ---------- HERO (dipakai juga di closing) ---------- */
-.hero{
-  position:relative;color:var(--cream);
-  background-size:cover;background-position:center;
-  min-height:100svh;display:flex;align-items:center;
-}
-.hero__scrim{
-  position:absolute;inset:0;
-  background:linear-gradient(90deg, rgba(22,60,44,.12) 10%, rgba(22,60,44,.62) 42%, rgba(22,60,44,.9) 68%, rgba(22,60,44,.94) 100%);
-}
-.hero__scrim--left{
-  background:linear-gradient(270deg, rgba(22,60,44,0) 28%, rgba(22,60,44,.6) 62%, rgba(22,60,44,.82) 100%);
-}
-@media (max-width:1023px){
-  .hero__scrim--left{
-    background:linear-gradient(180deg, rgba(22,60,44,.4) 0%, rgba(22,60,44,.88) 78%);
-  }
-}
-.hero__inner{position:relative;z-index:2;display:flex;justify-content:flex-end;}
-.hero__inner--left{justify-content:flex-start;}
-.hero__text{max-width:520px;}
-.hero__text h1, .hero__text h2{color:var(--cream);}
-.hero__text .accent{color:var(--gold-soft);}
-.hero__text .sub{color:rgba(247,240,225,.88);}
+/* ---------- HERO & CLOSING (layout split dengan ilustrasi) ---------- */
+.split-grid{display:grid;grid-template-columns:1fr;gap:32px;align-items:center;}
+.hero-content .accent, .closing-content .accent{color:var(--gold);}
 
-.hero__mobile-img{
-  display:none;
-  width:100%;
-  aspect-ratio:4 / 5;
-  object-fit:cover;
-  border-radius:var(--radius-sm);
-  box-shadow:0 16px 40px -18px rgba(22,60,44,.5);
-  margin:18px 0 4px;
+.illus-frame{
+  background:var(--cream-soft);border:1px solid var(--gold-soft);border-radius:var(--radius);
+  padding:28px;display:flex;align-items:center;justify-content:center;
 }
+.illus-frame img{width:100%;max-width:320px;height:auto;display:block;margin:0 auto;}
 
-/* Hero utama (above the fold) khusus mobile: gambar jadi elemen inline
-   di antara headline dan sub-headline, bukan background full-bleed lagi,
-   biar gak ada spasi kosong di atas dan urutannya headline > gambar > sub-headline */
-@media (max-width:1023px){
-  #hero{
-    background-image:none !important;
-    background-color:var(--emerald-deep);
-    min-height:auto;
-    padding:44px 0 36px;
-  }
-  #hero .hero__scrim{display:none;}
-  .hero__mobile-img{display:block;}
+.hero-img-mobile{
+  display:block;width:100%;max-width:300px;height:auto;margin:18px auto 4px;
+  background:var(--cream-soft);border:1px solid var(--gold-soft);border-radius:var(--radius);padding:20px;
+}
+.hero-media{display:none;}
+.closing-media{margin-bottom:8px;}
+
+@media (min-width:1024px){
+  .split-grid{grid-template-columns:1fr 1fr;gap:64px;}
+  .hero-img-mobile{display:none;}
+  .hero-media{display:flex;}
+  .closing-media{margin-bottom:0;}
+  .illus-frame{padding:40px;}
+  .illus-frame img{max-width:360px;}
 }
 
 /* ---------- STICKY CTA ---------- */
@@ -157,10 +134,16 @@ a:focus-visible, button:focus-visible{outline:3px solid var(--gold);outline-offs
 
 /* ---------- PROBLEM ---------- */
 .problem__grid{display:grid;grid-template-columns:1fr;gap:32px;align-items:center;}
-.problem__media img{border-radius:var(--radius);box-shadow:0 24px 60px -24px rgba(22,60,44,.35);}
+.problem__media{
+  background:var(--cream-soft);border:1px solid var(--gold-soft);border-radius:var(--radius);
+  padding:28px;display:flex;align-items:center;justify-content:center;
+}
+.problem__media img{width:100%;max-width:320px;height:auto;margin:0 auto;}
 .problem__note{color:var(--terracotta);font-weight:600;}
 @media (min-width:1024px){
   .problem__grid{grid-template-columns:1fr 1fr;gap:64px;}
+  .problem__media{padding:40px;}
+  .problem__media img{max-width:360px;}
 }
 
 /* ---------- MECHANISM / PHASEPATH ---------- */
@@ -231,7 +214,7 @@ a:focus-visible, button:focus-visible{outline:3px solid var(--gold);outline-offs
 
 /* ---------- FOOTER ---------- */
 .footer{padding:28px 0 110px;}
-.footer__inner{display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;font-size:13px;color:var(--ink-soft);}
+.footer__inner{display:flex;justify-content:center;font-size:13px;color:var(--ink-soft);}
 </style>
 </head>
 <body>
@@ -243,14 +226,16 @@ a:focus-visible, button:focus-visible{outline:3px solid var(--gold);outline-offs
   </div>
 </div>
 
-<section class="hero section" id="hero" style="background-image:url('https://drive.google.com/thumbnail?id=1-sI7zxdpeSBUm-xPtTpsmpfYONPkS4rE&sz=w1600');">
-  <div class="hero__scrim"></div>
-  <div class="container hero__inner">
-    <div class="hero__text">
+<section class="section section--full reveal" id="hero">
+  <div class="container split-grid">
+    <div class="hero-content">
       <h1>Rezekimu Bukan Kurang, Cuma Bocor Duluan. <span class="accent">Baraqah Code</span> Nutup Bocornya dalam 30 Hari.</h1>
-      <img class="hero__mobile-img" src="https://drive.google.com/thumbnail?id=1-sI7zxdpeSBUm-xPtTpsmpfYONPkS4rE&sz=w1000" alt="Ikhtiar yang tenang, tanpa panik">
+      <img class="hero-img-mobile" src="https://drive.google.com/thumbnail?id=1C5GSEYkPAdcDOiO7iyPpd3rhUXXynBRf&sz=w1000" alt="Ilustrasi rezeki yang mengalir lancar tanpa bocor" loading="lazy">
       <p class="sub">Cukup benerin cara hati kamu ikhtiar lewat 4 fase yang gampang diikutin, plus KIT tambahan yang tinggal dipakai tiap hari. Gak perlu mikir keras.</p>
       <a href="#harga" class="btn btn--gold">Ya, Aku Mau Mulai Sekarang</a>
+    </div>
+    <div class="hero-media illus-frame">
+      <img src="https://drive.google.com/thumbnail?id=1C5GSEYkPAdcDOiO7iyPpd3rhUXXynBRf&sz=w1200" alt="Ilustrasi rezeki yang mengalir lancar tanpa bocor" loading="lazy">
     </div>
   </div>
 </section>
@@ -258,7 +243,7 @@ a:focus-visible, button:focus-visible{outline:3px solid var(--gold);outline-offs
 <section class="section section--full problem reveal" id="masalah">
   <div class="container problem__grid">
     <div class="problem__media">
-      <img src="https://drive.google.com/thumbnail?id=1gkjERSIk_onMhsKP0KINCceXn_m_MDMG&sz=w1200" alt="Momen cemas menunggu balasan chat sambil pegang HP" loading="lazy">
+      <img src="https://drive.google.com/thumbnail?id=1gRnTwu6oviEDuCHO2rgqu4HGCba6GC47&sz=w1000" alt="Ilustrasi wadah bocor, simbol kegelisahan hati" loading="lazy">
     </div>
     <div class="problem__content">
       <h2>Kamu Udah Shalat, Udah Sedekah, Udah Ikhtiar Habis Habisan. Tapi Kok Rezekinya Tetap Kerasa Seret?</h2>
@@ -380,10 +365,12 @@ a:focus-visible, button:focus-visible{outline:3px solid var(--gold);outline-offs
   </div>
 </section>
 
-<section class="hero hero--closing section reveal" id="penutup" style="background-image:url('https://drive.google.com/thumbnail?id=1CBBMWqM7GYpmmmJjQaj5JC28VYwQzSaP&sz=w1600');">
-  <div class="hero__scrim hero__scrim--left"></div>
-  <div class="container hero__inner hero__inner--left">
-    <div class="hero__text">
+<section class="section section--full reveal" id="penutup">
+  <div class="container split-grid">
+    <div class="closing-media illus-frame">
+      <img src="https://drive.google.com/thumbnail?id=1UrkEtzT7jtZd1dYB3RLB_FGaAI2ZakSO&sz=w1200" alt="Ilustrasi jalan menuju cahaya fajar, langkah baru yang tenang" loading="lazy">
+    </div>
+    <div class="closing-content">
       <h2>Sekarang Kamu Ada di Dua Pilihan</h2>
       <p class="sub">Tutup halaman ini, besok kamu jalanin hari yang sama. Atau mulai hari ini, benerin cara ikhtiarmu, cukup satu langkah kecil dulu.</p>
       <a href="#harga" class="btn btn--gold">Ya, Aku Mau Rezekiku Berhenti Bocor</a>
@@ -394,7 +381,6 @@ a:focus-visible, button:focus-visible{outline:3px solid var(--gold);outline-offs
 <footer class="footer">
   <div class="container footer__inner">
     <span>Baraqah Code</span>
-    <span>Rewin Digital Kreatif</span>
   </div>
 </footer>
 
